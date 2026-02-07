@@ -147,8 +147,8 @@ body.light .user-chat-area{
 /* Avatar style for ALL messages */
 
 .avatar{
-  width:38px;
-  height:38px;
+  width:60px;
+  height:60px;
   border-radius:50%;
   object-fit:cover;
   flex-shrink:0;
