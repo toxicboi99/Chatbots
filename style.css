@@ -194,3 +194,27 @@ body.light .user-chat-area{
   height:140px;
   border-radius:50%;
 }
+/* ===== user info ===== */
+
+.user-info{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.user-pic{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.logout-btn{
+  padding:5px 10px;
+  border:none;
+  border-radius:15px;
+  cursor:pointer;
+  background:#ef4444;
+  color:white;
+  font-size:12px;
+}

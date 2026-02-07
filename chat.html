@@ -12,8 +12,17 @@
 
 <!-- ===== Top Bar ===== -->
 <div class="top-bar">
-  <h2>Sarthi AI</h2>
+
+  <h2>Sarthi Bot</h2>
+
+  <div class="user-info">
+    <img id="userPhoto" class="user-pic">
+    <span id="userName"></span>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+
 </div>
+
 
 
 <!-- ===== Chat Area ===== -->
@@ -39,7 +48,12 @@
   <button id="image"><img src="/img/arrow.png" alt="" width="30px"></button>
 
 </div>
-
+<!-- ✅ PROTECT PAGE -->
+<script>
+if(!localStorage.getItem("username")){
+  window.location.href = "login.html";
+}
+</script>
 
 <script src="script.js"></script>
 </body>

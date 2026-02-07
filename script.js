@@ -6,7 +6,19 @@ const imageInput = document.querySelector("#imageInput");
 
 // 🔗 Render backend URL
 const API_URL = "https://chatbot-4iy2.onrender.com";
+/* ===== load user info ===== */
 
+const username = localStorage.getItem("username");
+const photo = localStorage.getItem("photo");
+
+if(username){
+  document.getElementById("userName").textContent = username;
+}
+
+if(photo){
+  document.getElementById("userPhoto").src = photo;
+}
+/* ===== load user info ===== */
 let selectedBase64 = null;
 
 // ---------------- IMAGE PICK ----------------
@@ -144,4 +156,9 @@ function handleCredentialResponse(response){
   document.getElementById("chat").classList.add("active");
 
   addAI("Hello " + data.name + " 👋 How can I help you?");
+}
+/* Logout */
+function logout(){
+  localStorage.clear();
+  window.location.href = "login.html";
 }
