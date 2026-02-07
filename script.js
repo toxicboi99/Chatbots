@@ -69,7 +69,7 @@ function createUserBox(msg, img) {
 
   return `
     <div class="user-chat-box">
-      <img src="/img/user.png" class="ai-avatar">
+      <img src="/img/user.png" class="avatar">
       <div class="user-chat-area">
         ${imgHtml}${msg}
       </div>
@@ -80,7 +80,7 @@ function createUserBox(msg, img) {
 function createAIBox() {
   return `
     <div class="ai-chat-box">
-      <img src="/img/animation.gif" class="ai-avatar">
+      <img src="/img/animation.gif" class="avatar">
       <div class="ai-chat-area"></div>
     </div>
   `;
