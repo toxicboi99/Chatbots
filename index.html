@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="center">
+
+  <img src="img/Artificial Intelligence Chatbot.gif" width="300px" style="margin-bottom: 20px;">
+  <h1>Login with Google</h1>
+
+  <div id="g_id_onload"
+       data-client_id="869614258651-chi2go1h6u1mn542r4a146ka11j1672f.apps.googleusercontent.com"
+       data-callback="handleCredentialResponse">
+  </div>
+
+  <div class="g_id_signin" data-size="large"></div>
+
+
+<script>
+function handleCredentialResponse(response){
+
+  const data = JSON.parse(atob(response.credential.split('.')[1]));
+
+  // save user info
+  localStorage.setItem("username", data.name);
+  localStorage.setItem("photo", data.picture);
+
+  // ✅ redirect to chat page
+  window.location.href = "chat.html";
+}
+</script>
+
+</body>
+</html>

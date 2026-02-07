@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sarthi Chatbot</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ===== Top Bar ===== -->
+<div class="top-bar">
+  <h2>Sarthi AI</h2>
+</div>
+
+
+<!-- ===== Chat Area ===== -->
+<div class="chat-container">
+
+  <div class="ai-chat-box">
+    <img src="img/animation.gif" id="aiImage">
+    <div class="ai-chat-area">
+      Hello! How can I help you today?
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ===== Prompt ===== -->
+<div class="prompt-area">
+
+  <input type="text" id="prompt" placeholder="Message..." autocomplete="off">
+
+  <input type="file" id="imageInput" hidden>
+
+  <button id="image"><img src="/img/arrow.png" alt="" width="30px"></button>
+
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
