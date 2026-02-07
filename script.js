@@ -69,7 +69,7 @@ function createUserBox(msg, img) {
 
   return `
     <div class="user-chat-box">
-      <img src="/img/user.png" class="avatar">
+      <img src="/img/user.png" width="60">
       <div class="user-chat-area">
         ${imgHtml}${msg}
       </div>
