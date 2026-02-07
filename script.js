@@ -4,13 +4,16 @@ const sendBtn = document.querySelector("#submit");
 const imageBtn = document.querySelector("#image");
 const imageInput = document.querySelector("#imageInput");
 
+// 🔗 Render backend URL
+const API_URL = "https://chatbot-4iy2.onrender.com";
+
 let selectedBase64 = null;
 
 // ---------------- IMAGE PICK ----------------
 
 imageBtn.addEventListener("click", () => imageInput.click());
 
-imageInput.addEventListener("change", async () => {
+imageInput.addEventListener("change", () => {
   const file = imageInput.files[0];
   if (!file) return;
 
@@ -22,20 +25,19 @@ imageInput.addEventListener("change", async () => {
 });
 
 // ---------- typing dots ----------
+
 function startTyping(el) {
   el.innerHTML = `<img src="Loading.gif" class="load" width="40">`;
 }
 
-
 function stopTyping(el) {
-  // nothing needed now
+  // no-op
 }
-
 
 // ---------- backend call ----------
 
 async function askAI(text, image) {
-  const res = await fetch("http://localhost:3000/chat", {
+  const res = await fetch(`${API_URL}/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -46,7 +48,7 @@ async function askAI(text, image) {
     })
   });
 
-  if (!res.ok) throw "Server error";
+  if (!res.ok) throw new Error("Server error");
 
   const data = await res.json();
   return data.reply;
@@ -58,13 +60,19 @@ function createUserBox(msg, img) {
   let imgHtml = "";
 
   if (img) {
-    imgHtml = `<img src="${img}" style="max-width:180px;border-radius:10px;margin-bottom:6px"><br>`;
+    imgHtml = `
+      <img src="${img}" 
+           style="max-width:180px;border-radius:10px;margin-bottom:6px">
+      <br>
+    `;
   }
 
   return `
     <div class="user-chat-box">
-      <img src="/img/user.png" class="avatar">
-      <div class="user-chat-area">${imgHtml}${msg}</div>
+      <img src="/img/user.png" width="60">
+      <div class="user-chat-area">
+        ${imgHtml}${msg}
+      </div>
     </div>
   `;
 }
@@ -72,7 +80,7 @@ function createUserBox(msg, img) {
 function createAIBox() {
   return `
     <div class="ai-chat-box">
-<img src="/img/animation.gif" class="avatar">
+      <img src="/img/animation.gif" width="60">
       <div class="ai-chat-area"></div>
     </div>
   `;
@@ -86,7 +94,6 @@ async function handleChat(message) {
   const img = selectedBase64;
   selectedBase64 = null;
   imageInput.value = "";
-
   prompt.value = "";
 
   chatContainer.innerHTML += createUserBox(message, img);
@@ -96,7 +103,9 @@ async function handleChat(message) {
     chatContainer.innerHTML += createAIBox();
     chatContainer.scrollTop = chatContainer.scrollHeight;
 
-    const aiArea = chatContainer.lastElementChild.querySelector(".ai-chat-area");
+    const aiArea =
+      chatContainer.lastElementChild.querySelector(".ai-chat-area");
+
     startTyping(aiArea);
 
     try {
@@ -106,11 +115,10 @@ async function handleChat(message) {
       aiArea.innerHTML = reply
         .replace(/\*\*/g, "")
         .replace(/\n/g, "<br>");
-
-    } catch (e) {
+    } catch (err) {
       stopTyping(aiArea);
-      aiArea.innerHTML = "Server error";
-      console.error(e);
+      aiArea.innerHTML = "❌ Server error. Please try again.";
+      console.error(err);
     }
   }, 300);
 }
